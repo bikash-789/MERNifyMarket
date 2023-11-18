@@ -1,5 +1,8 @@
 import React from "react";
-
+import Cover1 from "../assets/cover-1.jpeg";
+import Cover2 from "../assets/cover-2.png";
+import Cover3 from "../assets/cover-3.png";
+import Cover4 from "../assets/cover-4.jpeg";
 function Carousel() {
   return (
     <div
@@ -10,36 +13,48 @@ function Carousel() {
       <div className="carousel-inner">
         <div className="carousel-item active">
           <img
-            src="https://cdn.shopify.com/s/files/1/0070/7032/files/trending-products_c8d0d15c-9afc-47e3-9ba2-f7bad0505b9b.png?format=jpg&quality=90&v=1614559651"
+            src={Cover1}
             className="d-block w-100"
             alt="electronics"
             style={{
               backgroundRepeat: "noRepeat",
-              height: "20rem",
+              height: "25rem",
               objectFit: "cover",
             }}
           />
         </div>
         <div className="carousel-item">
           <img
-            src="https://qph.fs.quoracdn.net/main-qimg-1566b540237fb844b0e545081ab5efb1"
+            src={Cover2}
             className="d-block w-100"
             alt="payments-methods"
             style={{
               backgroundRepeat: "noRepeat",
-              height: "20rem",
+              height: "25rem",
               objectFit: "cover",
             }}
           />
         </div>
         <div className="carousel-item">
           <img
-            src="https://d3eys52k95jjdh.cloudfront.net/wp-content/uploads/2018/09/new-amazon-echo-alexa-devices.png"
+            src={Cover3}
             className="d-block w-100"
             alt="payments-methods"
             style={{
               backgroundRepeat: "noRepeat",
-              height: "20rem",
+              height: "25rem",
+              objectFit: "cover",
+            }}
+          />
+        </div>
+        <div className="carousel-item">
+          <img
+            src={Cover4}
+            className="d-block w-100"
+            alt="payments-methods"
+            style={{
+              backgroundRepeat: "noRepeat",
+              height: "25rem",
               objectFit: "cover",
             }}
           />
