@@ -1,0 +1,39 @@
+.image-cont {
+  width: 100%;
+  height: 6rem;
+  position: relative;
+}
+
+.image-cont img {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+}
+
+.profile-card {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+.profile-card p:first-child {
+  font-weight: bolder;
+  margin-top: 1rem;
+}
+
+.profile-card p:nth-child(2) {
+  font-weight: 100;
+  font-size: small;
+}
+
+.profile-card .user-status {
+  font-weight: 100;
+  margin-top: 3rem;
+  font-size: small;
+}
+
+.profile-col {
+  background-color: #efefef;
+  color: #969393;
+  border-radius: 16px;
+  padding-top: 1rem;
+}
