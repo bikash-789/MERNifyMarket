@@ -4,7 +4,8 @@
   "description": "This is an ecommerce website",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "set NODE_ENV=dev && nodemon app.js"
   },
   "keywords": [
     "ecommerceClone"
