@@ -6,7 +6,7 @@ Certainly! Unfortunately, I can't include actual images here, but I'll guide you
 
 **Transforming E-Commerce with MERN Stack**
 
-![MERNifyMarket Logo](/frontend-react/public/assets/logo.png)
+![MERNifyMarket Logo](/frontend-react/src/assets/logo.png)
 
 ## Overview
 
@@ -54,18 +54,20 @@ Welcome to MERNifyMarket, a cutting-edge MERN stack e-commerce platform designed
 
 ## Screenshots
 
-![Screenshot 1](path/to/screenshot1.png)
-_Caption for Screenshot 1_
+![Screenshot 1](/frontend-react/src/assets/ss3.png)
+Sign in page
 
-![Screenshot 2](path/to/screenshot2.png)
-_Caption for Screenshot 2_
+![Screenshot 2](/frontend-react/src/assets/ss2.png)
+Sign up page
+
+![Screenshot 2](/frontend-react/src/assets/ss4.png)
+Home Page
+
+![Screenshot 2](/frontend-react/src/assets/ss1.png)
+Shop Page
 
 ## Contributing
 
 We welcome contributors to join us in shaping the future of online retail. Feel free to open issues, submit pull requests, or provide valuable feedback.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
 
 ## Explore MERNifyMarket and elevate your online shopping experience to new heights! 🌐🛍️✨
