@@ -1,7 +1,3 @@
-Certainly! Unfortunately, I can't include actual images here, but I'll guide you on how to structure your README file and where to place the screenshots.
-
----
-
 # MERNifyMarket 🚀
 
 **Transforming E-Commerce with MERN Stack**
