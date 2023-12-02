@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "./Layout";
 import { listRelated, read } from "./apiCore";
 import ProductCard from "./ProductCard";
-import Card from './Card';
+import PCard from "./PCard";
 
 const Product = (props) => {
   const [product, setProduct] = useState({});
@@ -15,15 +15,13 @@ const Product = (props) => {
       } else {
         setProduct(data);
         // fetch related product
-        listRelated(data._id).then(data=>{
-          if(data.error)
-          {
-            setError(data.error); 
-          }
-          else{
+        listRelated(data._id).then((data) => {
+          if (data.error) {
+            setError(data.error);
+          } else {
             setRelatedProduct(data);
           }
-        })
+        });
       }
     });
   };
@@ -33,27 +31,28 @@ const Product = (props) => {
     loadSingleProduct(productId);
   }, [props]);
   return (
-    <Layout
-      title={product && product.name}
-      description={
-        product && product.description && product.description.substring(0, 100)
-      }
-    >
-      
-
-      <div className="row">
-        <div className="col-8">
-        {product && product.description && <ProductCard product={product} showAddToCartButton={true}/>}
+    <div className="h-[100svh]">
+      <div className="flex flex-col justify-start">
+        <div className="w-full">
+          {product && product.description && (
+            <ProductCard product={product} showAddToCartButton={true} />
+          )}
         </div>
-        <div className="col-4">
-          <h4>Related Products</h4>
-          {relatedProduct.map((p, i)=>{
-            return <Card key={i} product={p}/>
-          })}
+        <br />
+        <hr className="text-slate-400 mx-12 h-2" />
+        <div className="w-full px-12 py-2">
+          <h1 className="text-3xl font-normal text-slate-600 font-sans">
+            You might also like
+          </h1>
+          <br />
+          <div className="flex flex-row flex-wrap mt-2">
+            {relatedProduct.map((p, i) => {
+              return <PCard key={i} product={p} />;
+            })}
+          </div>
         </div>
-
       </div>
-    </Layout>
+    </div>
   );
 };
 

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import Layout from "../core/Layout";
 import { signin, authenticate } from "../auth/index";
-import "./Signin.css";
 import { Redirect } from "react-router";
 import { isAuthenticated } from "../auth/index";
+import { Button, Input } from "@nextui-org/react";
+import { EyeFilledIcon } from "./EyeFilledIcon";
+import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
 
 // Signin component
 function Signin() {
@@ -15,10 +17,13 @@ function Signin() {
     loading: false,
     redirectTo: false,
   });
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  const toggleVisibility = () => setIsVisible(!isVisible);
 
   // Object destructuring
   const { email, password, error, loading, redirectTo } = values;
-  
+
   // Checks if user is authenticated or not based on cookie set / not set
   const { user } = isAuthenticated();
 
@@ -56,7 +61,7 @@ function Signin() {
     });
   };
 
-   // Method that displays error
+  // Method that displays error
   const showError = () => {
     return (
       <div
@@ -65,14 +70,16 @@ function Signin() {
       >
         {error}
       </div>
-    )
+    );
   };
   // Method that displays loading message
   const showLoading = () => {
-    return loading && (
-      <div className="alert alert-infor">
-        <h2>Loading...</h2>
-      </div>
+    return (
+      loading && (
+        <div className="alert alert-infor">
+          <h2>Loading...</h2>
+        </div>
+      )
     );
   };
 
@@ -87,44 +94,93 @@ function Signin() {
     }
   };
 
-  // Signin form
+  // // Signin form
+  // const signInForm = () => {
+  //   return (
+  //     <>
+  //       <div className="h-[100vh]">
+  //         <div className="flex flex-col items-center">
+  //           <h1>Sign In</h1>
+  //           <form>
+  //             <div className="">
+  //               <label className="">E-mail</label>
+  //               <input
+  //                 type="email"
+  //                 className="form-control"
+  //                 name="email"
+  //                 value={email}
+  //                 onChange={handleChange}
+  //               />
+  //             </div>
+  //             <div className="">
+  //               <label className="">Password</label>
+  //               <input
+  //                 type="password"
+  //                 className="form-control"
+  //                 name="password"
+  //                 value={password}
+  //                 onChange={handleChange}
+  //               />
+  //             </div>
+  //             <button onClick={handleSubmit}>Submit</button>
+  //           </form>
+  //         </div>
+  //       </div>
+  //     </>
+  //   );
+  // };
+
   const signInForm = () => {
     return (
-      <>
-        <div className="container">
-          <div className="row">
-            <div className="col col-12 col-md-6 offset-md-3 d-flex flex-column align-items-center form-content">
-              <h1>Sign In</h1>
-              <form>
-                <div className="form-group">
-                  <label className="form-label">E-mail</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    name="email"
-                    value={email}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="form-group">
-                  <label className="form-label">Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    name="password"
-                    value={password}
-                    onChange={handleChange}
-                  />
-                </div>
-                <button onClick={handleSubmit}>Submit</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </>
+      <div className=" w-11/12 px-4 mx-auto lg:w-4/12 flex flex-col items-center bg-white shadow-lg rounded-xl pb-5 pt-2 mt-10">
+        <h1 className="text-2xl text-center text-slate-600">Login</h1>
+        <br />
+        <Input
+          type="email"
+          variant="bordered"
+          label="Email"
+          name="email"
+          value={email}
+          onChange={handleChange}
+          placeholder="Enter your email"
+          className="max-w-xs"
+        />
+        <br />
+        <Input
+          label="Password"
+          variant="bordered"
+          name="password"
+          value={password}
+          onChange={handleChange}
+          placeholder="Enter your password"
+          endContent={
+            <button
+              className="focus:outline-none"
+              type="button"
+              onClick={toggleVisibility}
+            >
+              {isVisible ? (
+                <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+              ) : (
+                <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+              )}
+            </button>
+          }
+          type={isVisible ? "text" : "password"}
+          className="max-w-xs"
+        />
+        <br />
+        <Button
+          color="primary"
+          variant="flat"
+          onClick={handleSubmit}
+          className="mt-4"
+        >
+          Login
+        </Button>
+      </div>
     );
   };
-
 
   return (
     <div>
