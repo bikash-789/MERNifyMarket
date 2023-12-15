@@ -4,7 +4,6 @@ import "./dashboard.css";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
 import { getPurchaseHistory } from "./apiUser";
-import moment from "moment";
 
 function UserDashboard() {
   const [history, setHistory] = useState([]);
