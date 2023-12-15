@@ -35,8 +35,8 @@ function Home() {
       <Carousel />
       <br />
       <Searchbar />
-      <h1 className="text-xl md:text-2xl">Products by arrival</h1>
-      <div className="flex flex-row justify-center lg:justify-start items-center gap-5 flex-wrap mt-2">
+      <h1 className="text-xl md:text-4xl md:px-10">Products by arrival</h1>
+      <div className="flex flex-row justify-center lg:justify-between items-center gap-5 flex-wrap mt-2 md:px-10">
         {productsByArrival &&
           productsByArrival.map((product, index) => {
             return <PCard key={index} product={product} />;
@@ -44,8 +44,8 @@ function Home() {
       </div>
       <br />
       <br />
-      <p className="text-x md:text-2xl">Best Sellers</p>
-      <div className="flex flex-row justify-center lg:justify-start items-center gap-5 flex-wrap mt-2">
+      <p className="text-xl md:text-4xl md:px-10">Best Sellers</p>
+      <div className="flex flex-row justify-center lg:justify-between items-center gap-5 flex-wrap mt-2 md:px-10">
         {productsBySell &&
           productsBySell.map((product, index) => {
             return <PCard key={index} product={product} />;

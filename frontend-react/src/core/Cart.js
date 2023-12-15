@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Layout from "./Layout";
 import { getCart } from "./cartHelpers";
 import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
+
 import Checkout from "./Checkout";
 
 const Cart = () => {
@@ -53,23 +53,22 @@ const Cart = () => {
   //   shows message to user when there is no any item in cart
   const noItemsMessage = () => {
     return (
-      <h2>
-        Your cart is empty
-        <br />
-        <Link to="/shop">Continue shopping</Link>
+      <h2 className="px-2 text-lg font-medium">
+        Your cart is empty 🛒{" "}
+        <Link to="/shop" className="text-blue-600">
+          Continue shopping
+        </Link>
       </h2>
     );
   };
 
   return (
     <div className="h-[100vh] flex flex-col lg:flex-row">
-      <div className="w-full lg:w-6/12 overflow-y-scroll">
+      <div className="w-full lg:w-6/12 overflow-y-scroll border-r-1 border-slate-200">
         {items.length > 0 ? showItems(items) : noItemsMessage()}
       </div>
       <div className="w-full lg:w-6/12 p-2">
         <h2 className="text-lg font-medium">Your cart summary</h2>
-        <br />
-        <hr className="text-slate-400 mr-12 h-2" />
         <Checkout
           products={items}
           cartModificationCallback={handleCartModification}

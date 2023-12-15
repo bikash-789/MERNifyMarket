@@ -6,6 +6,7 @@ import { isAuthenticated } from "../auth/index";
 import { Button, Input } from "@nextui-org/react";
 import { EyeFilledIcon } from "./EyeFilledIcon";
 import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
+import { Spinner } from "@nextui-org/react";
 
 // Signin component
 function Signin() {
@@ -32,12 +33,14 @@ function Signin() {
     const { name, value } = e.target;
     setValues({
       ...values,
+      error: false,
       [name]: value,
     });
   };
 
   // Method to submit the form data to backend
   const handleSubmit = (e) => {
+    setValues({ ...values, loading: true });
     // This will prevent the page from reloading
     e.preventDefault();
     // signin - a method that sends form data to backend and returns the response
@@ -54,6 +57,7 @@ function Signin() {
         authenticate(data, () => {
           setValues({
             ...values,
+            loading: false,
             redirectTo: true,
           });
         });
@@ -65,22 +69,16 @@ function Signin() {
   const showError = () => {
     return (
       <div
-        className="alert alert-danger"
+        className="mt-3 md:20 shadow-md rounded-md bg-red-200 text-red-800 px-3 py-2 w-fit flex justify-start items-center mx-auto"
         style={{ display: error ? "" : "none" }}
       >
-        {error}
+        Error: {error}
       </div>
     );
   };
   // Method that displays loading message
   const showLoading = () => {
-    return (
-      loading && (
-        <div className="alert alert-infor">
-          <h2>Loading...</h2>
-        </div>
-      )
-    );
+    return loading && <Spinner />;
   };
 
   // Method that redirects user to user/admin dashboard
@@ -93,42 +91,6 @@ function Signin() {
       return <Redirect to="/user/dashboard" />;
     }
   };
-
-  // // Signin form
-  // const signInForm = () => {
-  //   return (
-  //     <>
-  //       <div className="h-[100vh]">
-  //         <div className="flex flex-col items-center">
-  //           <h1>Sign In</h1>
-  //           <form>
-  //             <div className="">
-  //               <label className="">E-mail</label>
-  //               <input
-  //                 type="email"
-  //                 className="form-control"
-  //                 name="email"
-  //                 value={email}
-  //                 onChange={handleChange}
-  //               />
-  //             </div>
-  //             <div className="">
-  //               <label className="">Password</label>
-  //               <input
-  //                 type="password"
-  //                 className="form-control"
-  //                 name="password"
-  //                 value={password}
-  //                 onChange={handleChange}
-  //               />
-  //             </div>
-  //             <button onClick={handleSubmit}>Submit</button>
-  //           </form>
-  //         </div>
-  //       </div>
-  //     </>
-  //   );
-  // };
 
   const signInForm = () => {
     return (
@@ -178,6 +140,7 @@ function Signin() {
         >
           Login
         </Button>
+        {showLoading()}
       </div>
     );
   };
@@ -186,7 +149,6 @@ function Signin() {
     <div>
       <Layout showCarousel={true}>
         {showError()}
-        {showLoading()}
         {redirectUser()}
         {signInForm()}
       </Layout>

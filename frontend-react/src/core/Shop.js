@@ -4,7 +4,7 @@ import { getCategories, getFilteredProducts } from "./apiCore";
 import CheckBox from "./CheckBox";
 import RadioBox from "./RadioBox";
 import { prices } from "./fixedPrices";
-import { Button } from "@nextui-org/react";
+import { Switch } from "@nextui-org/react";
 
 function Shop() {
   // A state to manage filters - filters based on categories and price range
@@ -111,23 +111,30 @@ function Shop() {
     return (
       size > 0 &&
       size >= limit && (
-        <Button
-          color="success"
-          variant="ghost"
+        <button
           onClick={loadMore}
-          className="mt-4"
+          className="mt-4 bg-green-500 rounded-lg px-2 py-1 text-sm w-full text-green-100"
         >
           Load more
-        </Button>
+        </button>
       )
     );
   };
-
+  // Show/hide menu
+  const showHideMenu = (isSelected) => {
+    let menu = document.getElementById("menu");
+    if (isSelected) {
+      menu.style.display = "block";
+    } else {
+      menu.style.display = "none";
+    }
+  };
   return (
     <div className="h-[100vh] flex">
       {/* Sidebar */}
       <aside
-        className="w-full lg:w-2/12 lg:h-[100%] border-2 border-slate-100 px-3 top-0 z-20"
+        className="w-full lg:w-3/12 lg:h-[100%] border-2 border-slate-100 px-2 top-0 z-20 hidden md:block text-xs md:px-4 md:text-lg"
+        id="menu"
         style={{ position: "-webkit-sticky", position: "sticky" }}
       >
         <div>
@@ -152,8 +159,18 @@ function Shop() {
         </div>
       </aside>
       {/* main */}
-      <div className="w-full lg:w-10/12 h-[100%] flex flex-col items-start justify-start px-3 overflow-scroll pb-20">
-        <div className="flex flex-row justify-start items-center gap-5 flex-wrap">
+      <div className="w-full lg:w-9/12 h-[100vh] flex flex-col items-start justify-start px-3 overflow-scroll pb-10">
+        <small className="md:hidden">
+          <Switch
+            aria-label="Automatic updates"
+            size="sm"
+            onValueChange={(isSelected) => showHideMenu(isSelected)}
+          >
+            Toggle Menu
+          </Switch>
+        </small>
+        <br />
+        <div className="flex flex-row justify-between items-center flex-wrap gap-y-5">
           {filteredResults &&
             filteredResults.map((p, i) => <PCard key={i} product={p} />)}
         </div>

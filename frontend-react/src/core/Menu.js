@@ -7,7 +7,6 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  Link,
   DropdownItem,
   DropdownTrigger,
   Dropdown,
@@ -18,109 +17,23 @@ import {
 } from "@nextui-org/react";
 import MernifyLogo from "../assets/logo.svg";
 import "./Menu.css";
+
 const isActive = (history, path) => {
   if (history.location.pathname === path) {
     return true;
   } else return false;
 };
 
-// function Menu({ history }) {
-//   return (
-//     <div>
-//       <ul className="nav nav-tabs bg-dark py-2">
-//         <li className="nav-item mx-2 p-1">
-//           <Link className="hover-li" style={isActive(history, "/")} to="/">
-//             Home
-//           </Link>
-//         </li>
-//         <li className="nav-item mx-2 p-1">
-//           <Link
-//             className="hover-li"
-//             style={isActive(history, "/shop")}
-//             to="/shop"
-//           >
-//             Shop
-//           </Link>
-//         </li>
-//         <li className="nav-item mx-2 p-1">
-//           <Link
-//             className="hover-li"
-//             style={isActive(history, "/cart")}
-//             to="/cart"
-//           >
-//             Cart <sup><small className="cart-badge">{itemTotal()}</small></sup>
-//           </Link>
-//         </li>
-//         <li className="nav-item mx-2 p-1">
-//           {isAuthenticated() && isAuthenticated().user.role === 1 ? (
-//             <Link
-//               className="hover-li"
-//               style={isActive(history, "/admin/dashboard")}
-//               to="/admin/dashboard"
-//             >
-//               Dashboard
-//             </Link>
-//           ) : (
-//             <Link
-//               className="hover-li"
-//               style={isActive(history, "/user/dashboard")}
-//               to="/user/dashboard"
-//             >
-//               Dashboard
-//             </Link>
-//           )}
-//         </li>
-//         {!isAuthenticated() && (
-//           <>
-//             <li className="nav-item mx-2 p-1">
-//               <Link
-//                 className="hover-li"
-//                 style={isActive(history, "/signin")}
-//                 to="/signin"
-//               >
-//                 Signin
-//               </Link>
-//             </li>
-//             <li className="nav-item mx-2 p-1">
-//               <Link
-//                 className="hover-li"
-//                 style={isActive(history, "/signup")}
-//                 to="/signup"
-//               >
-//                 Signup
-//               </Link>
-//             </li>
-//           </>
-//         )}
-//         {isAuthenticated() && (
-//           <>
-//             <li className="nav-item mx-2 p-1">
-//               <span
-//                 className="hover-li"
-//                 style={{ cursor: "pointer", color: "white" }}
-//                 onClick={() =>
-//                   signout(() => {
-//                     history.push("/");
-//                   })
-//                 }
-//               >
-//                 Signout
-//               </span>
-//             </li>
-//           </>
-//         )}
-//       </ul>
-//     </div>
-//   );
-// }
-
 function Menu({ history }) {
-  const { name, email } = isAuthenticated() && isAuthenticated().user;
+  const { name, email, role } = isAuthenticated() && isAuthenticated().user;
+  const fullName = name && name.split(" ");
+  const firstName = fullName && fullName[0][0];
+  const lastName = fullName && fullName[1] && fullName[1][0];
   return (
     <Navbar>
       <NavbarBrand>
         <Linkk to="/">
-          <img src={MernifyLogo} width={170} height={170} />
+          <img src={MernifyLogo} width={170} height={170} alt="brand-logo" />
         </Linkk>
       </NavbarBrand>
 
@@ -128,20 +41,20 @@ function Menu({ history }) {
         className="hidden lg:flex sm:w-2/5 w-11/12 gap-4"
         justify="center"
       >
-        <NavbarItem isActive={isActive(history, "/") == true ? true : false}>
+        <NavbarItem isActive={isActive(history, "/") === true ? true : false}>
           <Linkk to="/" className="text-black">
             Home
           </Linkk>
         </NavbarItem>
         <NavbarItem
-          isActive={isActive(history, "/shop") == true ? true : false}
+          isActive={isActive(history, "/shop") === true ? true : false}
         >
           <Linkk to="/shop" className="text-black">
             Shop
           </Linkk>
         </NavbarItem>
         <NavbarItem
-          isActive={isActive(history, "/cart") == true ? true : false}
+          isActive={isActive(history, "/cart") === true ? true : false}
         >
           <Linkk to="/cart" className="text-black">
             <Badge content={itemTotal()} color="danger" placement="top-right">
@@ -170,7 +83,7 @@ function Menu({ history }) {
         <NavbarContent as="div" justify="end">
           <Dropdown placement="bottom-end">
             <DropdownTrigger>
-              <Avatar
+              {/* <Avatar
                 isBordered
                 as="button"
                 className="transition-transform"
@@ -178,7 +91,12 @@ function Menu({ history }) {
                 name={name}
                 size="sm"
                 src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-              />
+              /> */}
+              <div className="bg-orange-500 rounded-full w-[45px] h-[45px] flex justify-center items-center border-2 border-slate-400">
+                <span className="text-white">
+                  {firstName !== null ? firstName + lastName : "U"}
+                </span>
+              </div>
             </DropdownTrigger>
             <DropdownMenu aria-label="Profile Actions" variant="flat">
               <DropdownItem key="profile" className="h-14 gap-2">
@@ -186,17 +104,27 @@ function Menu({ history }) {
                 <p className="font-semibold">{email}</p>
               </DropdownItem>
               <DropdownItem key="dashboard">
-                <Linkk to="/dashboard">Dashboard</Linkk>
+                <Linkk to={role === 0 ? "/user/dashboard" : "/admin/dashboard"}>
+                  Profile
+                </Linkk>
               </DropdownItem>
-              <DropdownItem key="mypurchasehistory">
-                <Linkk to="/dashboard">My Purchase history</Linkk>
-              </DropdownItem>
+              {role === 0 ? (
+                <DropdownItem key="mypurchasehistory">
+                  <Linkk to="/">My Purchase history</Linkk>
+                </DropdownItem>
+              ) : (
+                ""
+              )}
               <DropdownItem key="shop">
                 <Linkk to="/shop">Shop</Linkk>
               </DropdownItem>
-              <DropdownItem key="cart">
-                <Linkk to="/cart">Cart</Linkk>
-              </DropdownItem>
+              {role === 0 ? (
+                <DropdownItem key="cart">
+                  <Linkk to="/cart">Cart</Linkk>
+                </DropdownItem>
+              ) : (
+                ""
+              )}
               <DropdownItem
                 key="logout"
                 color="danger"

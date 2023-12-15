@@ -21,7 +21,7 @@ import UpdateProduct from "./admin/UpdateProduct";
 function Routes() {
   return (
     <BrowserRouter>
-      <main className="w-full md:w-4/5 lg:w-9/12 mx-auto bg-white h-[100vh]">
+      <main className="w-full md:w-4/5 lg:w-9/12 mx-auto bg-white h-[100vh] overflow-y-scroll">
         <Menu />
         <Switch>
           <Route path="/" exact component={Home} />

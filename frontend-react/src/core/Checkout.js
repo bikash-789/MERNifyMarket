@@ -5,6 +5,7 @@ import { createOrder, getBraintreeClientToken } from "./apiCore.js";
 import DropIn from "braintree-web-drop-in-react";
 import { processPayment } from "./apiCore.js";
 import { emptyCart } from "./cartHelpers.js";
+import { Button } from "@nextui-org/react";
 
 const Checkout = ({ products, cartModificationCallback }) => {
   const [data, setData] = useState({
@@ -43,10 +44,14 @@ const Checkout = ({ products, cartModificationCallback }) => {
   };
   const showCheckout = () => {
     return isAuthenticated() ? (
-      <div>{showDropIn()}</div>
+      <div>
+        <br />
+        {showDropIn()}
+      </div>
     ) : (
       <Link to="/signin">
-        <button className="btn btn-primary">Sign in to checkout</button>
+        <br />
+        <Button color="primary">Sign in to checkout</Button>
       </Link>
     );
   };
@@ -133,10 +138,10 @@ const Checkout = ({ products, cartModificationCallback }) => {
   const showError = (error) => {
     return (
       <div
-        className="alert alert-danger"
+        className="mt-3 md:20 shadow-md rounded-md bg-red-200 text-red-800 px-3 py-2 w-fit flex justify-start items-center"
         style={{ display: error ? "" : "none" }}
       >
-        {error}
+        Error: {error}
       </div>
     );
   };
@@ -144,10 +149,10 @@ const Checkout = ({ products, cartModificationCallback }) => {
   const showSuccess = (success) => {
     return (
       <div
-        className="alert alert-info"
+        className="mt-3 md:20 shadow-md rounded-md bg-green-200 text-green-800 px-3 py-2 w-fit flex justify-start items-center"
         style={{ display: success ? "" : "none" }}
       >
-        Thanks! Your payment was successful!
+        {success}
       </div>
     );
   };

@@ -107,10 +107,7 @@ const Orders = () => {
                     <span className="bg-info">Order ID: {o._id}</span>
                   </h4>
                   <ul className="list-group mb-2">
-                    <li className="list-group-item">Status: {showStatus(o)}</li>
-                    <li className="list-group-item">
-                      Transaction ID: {o.transaction_id}
-                    </li>
+                    <li className="list-group-item">{showStatus(o)}</li>
                     <li className="list-group-item">Amount: {o.amount}</li>
                     <li className="list-group-item">
                       Ordered by: {o.user.name}

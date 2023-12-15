@@ -9,7 +9,7 @@ ReactDOM.render(
   <NextUIProvider>
     <React.StrictMode>
       <main
-        className="bg-slate-200 h-full w-[100vw]"
+        className="bg-white h-[100vh] w-[100vw]"
         style={{ background: "#F4F3EE" }}
       >
         <Routes />
