@@ -108,13 +108,6 @@ function Menu({ history }) {
                   Profile
                 </Linkk>
               </DropdownItem>
-              {role === 0 ? (
-                <DropdownItem key="mypurchasehistory">
-                  <Linkk to="/">My Purchase history</Linkk>
-                </DropdownItem>
-              ) : (
-                ""
-              )}
               <DropdownItem key="shop">
                 <Linkk to="/shop">Shop</Linkk>
               </DropdownItem>
