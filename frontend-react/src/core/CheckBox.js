@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 function CheckBox({ categories, handleFilters }) {
   const [checked, setChecked] = useState([]);
-  // ON checked checkbox this function gets triggered 
+  // ON checked checkbox this function gets triggered
   const handleToggle = (c) => () => {
     const currentCategoryId = checked.indexOf(c);
     const newCheckedCategoryId = [...checked];
@@ -21,19 +21,23 @@ function CheckBox({ categories, handleFilters }) {
     handleFilters(newCheckedCategoryId);
   };
 
-  return categories.map((c, i) => {
-    return (
-      <li key={i} className="list-unstyled">
-        <input
-          onChange={handleToggle(c._id)}
-          type="checkbox"
-          className="form-check-input"
-          value={checked.indexOf(c._id) === -1}
-        />
-        <label className="form-check-label mx-2">{c.name}</label>
-      </li>
-    );
-  });
+  return (
+    <>
+      {categories.map((c, i) => {
+        return (
+          <li key={i} className="list-unstyled">
+            <input
+              onChange={handleToggle(c._id)}
+              type="checkbox"
+              className="form-check-input"
+              value={checked.indexOf(c._id) === -1}
+            />
+            <label className="form-check-label mx-2">{c.name}</label>
+          </li>
+        );
+      })}
+    </>
+  );
 }
 
 export default CheckBox;

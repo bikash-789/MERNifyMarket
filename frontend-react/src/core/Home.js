@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Layout from "./Layout";
 import { getProducts } from "./apiCore";
-import Card from "./Card";
+import PCard from "./PCard";
 import Searchbar from "./Searchbar";
+import Carousel from "./Carousel";
 function Home() {
   const [productsBySell, setProductsBySell] = useState([]);
   const [productsByArrival, setProductsByArrival] = useState([]);
@@ -31,25 +31,27 @@ function Home() {
     loadProductsBySell();
   }, []);
   return (
-    <Layout showCarousel={true} className={`container-fluid`}>
+    <div className="px-1 md:px-5 pb-5">
+      <Carousel />
+      <br />
       <Searchbar />
-      <p className="display-5">Products by arrival</p>
-      <hr />
-      <div className="row">
-        {productsByArrival && productsByArrival.map((product, index) => {
-          return <Card key={index} product={product} />;
-        })}
+      <h1 className="text-xl md:text-4xl md:px-10">Products by arrival</h1>
+      <div className="flex flex-row justify-center lg:justify-between items-center gap-5 flex-wrap mt-2 md:px-10">
+        {productsByArrival &&
+          productsByArrival.map((product, index) => {
+            return <PCard key={index} product={product} />;
+          })}
       </div>
       <br />
       <br />
-      <p className="display-5">Best Sellers</p>
-      <hr />
-      <div className="row d-flex flex-wrap justify-content-center justify-content-md-start align-items-start">
-        {productsBySell && productsBySell.map((product, index) => {
-          return <Card key={index} product={product} />;
-        })}
+      <p className="text-xl md:text-4xl md:px-10">Best Sellers</p>
+      <div className="flex flex-row justify-center lg:justify-between items-center gap-5 flex-wrap mt-2 md:px-10">
+        {productsBySell &&
+          productsBySell.map((product, index) => {
+            return <PCard key={index} product={product} />;
+          })}
       </div>
-    </Layout>
+    </div>
   );
 }
 

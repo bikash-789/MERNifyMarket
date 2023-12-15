@@ -7,7 +7,7 @@ function Layout({ title, description, className, children, showCarousel }) {
       {showCarousel ? <Carousel /> : ""}
       <div className={className}>
         {title && description && (
-          <div className="d-flex flex-column py-5 px-5 bg-opacity-50 bg-secondary">
+          <div className="flex flex-col py-5 px-5 bg-opacity-50 bg-secondary">
             <h2>{title}</h2>
             <p className="lead">{description}</p>
           </div>

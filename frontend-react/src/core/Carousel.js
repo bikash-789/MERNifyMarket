@@ -18,7 +18,7 @@ function Carousel() {
             alt="electronics"
             style={{
               backgroundRepeat: "noRepeat",
-              height: "25rem",
+              height: "20rem",
               objectFit: "cover",
             }}
           />
@@ -30,7 +30,7 @@ function Carousel() {
             alt="payments-methods"
             style={{
               backgroundRepeat: "noRepeat",
-              height: "25rem",
+              height: "20rem",
               objectFit: "cover",
             }}
           />
@@ -42,7 +42,7 @@ function Carousel() {
             alt="payments-methods"
             style={{
               backgroundRepeat: "noRepeat",
-              height: "25rem",
+              height: "20rem",
               objectFit: "cover",
             }}
           />
@@ -54,7 +54,7 @@ function Carousel() {
             alt="payments-methods"
             style={{
               backgroundRepeat: "noRepeat",
-              height: "25rem",
+              height: "20rem",
               objectFit: "cover",
             }}
           />

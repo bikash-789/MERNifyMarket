@@ -9,12 +9,12 @@ function Profile({ match }) {
   const [values, setValues] = useState({
     name: "",
     email: "",
-    password: "",
+    newPassword: "",
     success: false,
     error: false,
   });
 
-  const { name, email, password, success, error } = values;
+  const { name, email, newPassword, success, error } = values;
   const { user, token } = isAuthenticated();
   const init = (userId) => {
     // console.log(userId);
@@ -36,7 +36,7 @@ function Profile({ match }) {
 
   const clickSubmit = (e) => {
     e.preventDefault();
-    update(match.params.userId, token, { name, email, password }).then(
+    update(match.params.userId, token, { name, email, newPassword }).then(
       (data) => {
         if (data.error) {
           console.log(data.error);
@@ -80,12 +80,12 @@ function Profile({ match }) {
           />
         </div>
         <div className="form-group">
-          <label className="text-muted">Password</label>
+          <label className="text-muted">New Password</label>
           <input
             type="password"
-            onChange={handleChange("password")}
+            onChange={handleChange("newPassword")}
             className="form-control"
-            value={password}
+            value={newPassword}
           />
         </div>
         <br />
@@ -102,7 +102,7 @@ function Profile({ match }) {
       title={"Profile"}
       description={"Update your profile"}
     >
-      {profileUpdate(name, email, password)}
+      {profileUpdate(name, email, newPassword)}
       {redirectUser(success)}
     </Layout>
   );

@@ -22,7 +22,6 @@ exports.signUp = (req, res) => {
   });
 };
 
-
 // READ - fetch user from database and check for authentication
 exports.signIn = (req, res) => {
   const { email, password } = req.body;
@@ -69,7 +68,7 @@ exports.signOut = (req, res) => {
   let user = req.user;
   console.log(user);
   res.clearCookie("t");
-  res.json({ message: "Signed out successfully!!"});
+  res.json({ message: "Signed out successfully!!" });
 };
 
 // READ - will check if the current user is signed in or not
@@ -79,8 +78,7 @@ exports.requireSignIn = expressJwt({
   userProperty: "auth",
 });
 
-
-// This will check if the current logged in have permission to access 
+// This will check if the current logged in have permission to access
 // private routes. For ex: If I'm a logged in user and I want to access
 // information of other users, it should not provide permission to access
 // So, we can achieve this by checking if logged in user credential matches
@@ -94,7 +92,6 @@ exports.isAuth = (req, res, next) => {
   }
   next();
 };
-
 
 //function to check if the user is admin or normal user
 exports.isAdmin = (req, res, next) => {

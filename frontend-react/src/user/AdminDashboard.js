@@ -8,7 +8,7 @@ function AdminDashboard() {
     user: { name, email, role },
   } = isAuthenticated();
   return (
-    <div className="container">
+    <div className="container h-[100vh]">
       <Layout showCarousel={false}>
         <div className="container">
           <div className="row p-3 fs-3">

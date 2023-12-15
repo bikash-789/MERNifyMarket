@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Layout from "./Layout";
-import Card from "./Card";
+import PCard from "./PCard";
 import { getCategories, getFilteredProducts } from "./apiCore";
 import CheckBox from "./CheckBox";
 import RadioBox from "./RadioBox";
 import { prices } from "./fixedPrices";
+import { Switch } from "@nextui-org/react";
 
 function Shop() {
   // A state to manage filters - filters based on categories and price range
@@ -36,11 +36,10 @@ function Shop() {
     loadFilterResults(skip, limit, myFilters.filters);
   }, []);
 
-  
   // Handle change in price
   const handlePrice = (value) => {
     // Goes to prices object where range is mapped with name
-    const priceObjectArray = prices; 
+    const priceObjectArray = prices;
     /*
     Object defined like this : 
 
@@ -62,7 +61,7 @@ function Shop() {
     // priceRange will contain the array representing price range in form [min, max]
     return priceRange;
   };
-  
+
   // Load filtered results into a state
   const loadFilterResults = (filters) => {
     // API
@@ -93,7 +92,6 @@ function Shop() {
     setMyFilters(newFilters);
   };
 
-
   // Load more function
   const loadMore = () => {
     let toSkip = skip + limit;
@@ -113,30 +111,44 @@ function Shop() {
     return (
       size > 0 &&
       size >= limit && (
-        <button onClick={loadMore} className="btn btn-warning mb-5">
-          Load More
+        <button
+          onClick={loadMore}
+          className="mt-4 bg-green-500 rounded-lg px-2 py-1 text-sm w-full text-green-100"
+        >
+          Load more
         </button>
       )
     );
   };
-
+  // Show/hide menu
+  const showHideMenu = (isSelected) => {
+    let menu = document.getElementById("menu");
+    if (isSelected) {
+      menu.style.display = "block";
+    } else {
+      menu.style.display = "none";
+    }
+  };
   return (
-    <Layout
-      title="Shop Page"
-      description="Search and find products of your choice!"
-    >
-      <div className="row container-fluid">
-        <div className="col-4 left-side">
-          <h4>Filter by Category</h4>
+    <div className="h-[100vh] flex">
+      {/* Sidebar */}
+      <aside
+        className="w-full lg:w-3/12 lg:h-[100%] border-2 border-slate-100 px-2 top-0 z-20 hidden md:block text-xs md:px-4 md:text-lg"
+        id="menu"
+        style={{ position: "-webkit-sticky", position: "sticky" }}
+      >
+        <div>
+          <h1 className="text-bold">Select Categories</h1>
           <ul>
-            {/* Check box to select categories of product */}
             <CheckBox
               categories={categories}
               handleFilters={(filters) => handleFilters(filters, "category")}
             />
           </ul>
-          <hr />
-          <h4>Filter by Price range</h4>
+        </div>
+        <br />
+        <div>
+          <h1 className="text-bold">Filter by Price range</h1>
           <ul>
             {/* Radio box to select price range of product*/}
             <RadioBox
@@ -145,17 +157,26 @@ function Shop() {
             />
           </ul>
         </div>
-
-        <div className="col-8 ">
-          <div className="d-flex flex-wrap justify-content-center justify-content-md-start align-items-start">
-            {filteredResults &&
-              filteredResults.map((p, i) => <Card key={i} product={p} />)}
-          </div>
-          <hr />
-          {loadMoreBtn()}
+      </aside>
+      {/* main */}
+      <div className="w-full lg:w-9/12 h-[100vh] flex flex-col items-start justify-start px-3 overflow-scroll pb-10">
+        <small className="md:hidden">
+          <Switch
+            aria-label="Automatic updates"
+            size="sm"
+            onValueChange={(isSelected) => showHideMenu(isSelected)}
+          >
+            Toggle Menu
+          </Switch>
+        </small>
+        <br />
+        <div className="flex flex-row justify-between items-center flex-wrap gap-y-5">
+          {filteredResults &&
+            filteredResults.map((p, i) => <PCard key={i} product={p} />)}
         </div>
+        {loadMoreBtn()}
       </div>
-    </Layout>
+    </div>
   );
 }
 
